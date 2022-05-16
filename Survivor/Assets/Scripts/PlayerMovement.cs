@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private CharacterController _characterController;
     private Rigidbody _rigidbody;
 
     [SerializeField]
@@ -12,7 +11,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        _characterController = GetComponent<CharacterController>();
         _rigidbody = GetComponent<Rigidbody>();
     }
 
@@ -23,7 +21,8 @@ public class PlayerMovement : MonoBehaviour
 
         var movement = new Vector3(horizontal, 0, vertical) * Time.deltaTime * _speed;
 
-        _characterController.Move(movement);  
-        //_rigidbody.AddForce(movement);
+        //_characterController.Move(movement);  
+        //transform.position = Vector3.MoveTowards(transform.position, transform.position + movement, 1000);
+        _rigidbody.MovePosition(transform.position + movement);
     }
 }

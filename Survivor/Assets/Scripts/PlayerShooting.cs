@@ -8,6 +8,9 @@ public class PlayerShooting : MonoBehaviour
     private Projectile _projectile;
 
     [SerializeField]
+    private Transform _firePoint;
+
+    [SerializeField]
     private float _angleSpeed = 50;
 
     private void Update()
@@ -20,6 +23,13 @@ public class PlayerShooting : MonoBehaviour
             lookPos.y = 0;
             var rotation = Quaternion.LookRotation(lookPos);
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * _angleSpeed);
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            var projectileClone = Instantiate(_projectile);
+            projectileClone.transform.position = _firePoint.position;
+            projectileClone.GetComponent<Rigidbody>().AddForce(transform.forward * 10, ForceMode.Impulse);
         }
     }
 }
