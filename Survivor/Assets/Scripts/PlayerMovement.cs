@@ -9,6 +9,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float _speed;
 
+    [SerializeField]
+    private float _angleSpeed;
+
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -21,8 +24,16 @@ public class PlayerMovement : MonoBehaviour
 
         var movement = new Vector3(horizontal, 0, vertical) * Time.deltaTime * _speed;
 
-        //_characterController.Move(movement);  
-        //transform.position = Vector3.MoveTowards(transform.position, transform.position + movement, 1000);
         _rigidbody.MovePosition(transform.position + movement);
+
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out var raycastHit))
+        {
+            var lookPos = raycastHit.point - transform.position;
+            lookPos.y = 0;
+            var rotation = Quaternion.LookRotation(lookPos);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * _angleSpeed);
+        }
     }
 }
