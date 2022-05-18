@@ -7,13 +7,11 @@ using UnityEngine.UI;
 public class PlayerHUD : MonoBehaviour
 {
     private Text _text;
-    private PlayerShooting _shooting;
     private GunData _data;
 
-    private void Start()
+    private void Awake()
     {
-        _shooting = FindObjectOfType<PlayerShooting>();
-        _shooting.OnGunTaken += Initialize;
+        FindObjectOfType<PlayerShooting>().OnGunTaken += Initialize;
 
         _text = GetComponent<Text>();
     }
