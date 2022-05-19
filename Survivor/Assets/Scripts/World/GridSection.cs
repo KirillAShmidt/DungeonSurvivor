@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class GridSection
 {
-    public Vector3 Section { get; set; }
+    public Vector3 Coordinates { get; set; }
     
     public bool IsCreated { get; set; }
 
-    public GridSection(Vector3 section)
+    public GridSection(Vector3 coordinates)
     {
-        Section = section;
+        Coordinates = coordinates;
     }    
 }

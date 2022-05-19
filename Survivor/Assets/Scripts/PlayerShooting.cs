@@ -48,7 +48,9 @@ public class PlayerShooting : MonoBehaviour
     public IEnumerator Realoading()
     {
         OnReloadStart?.Invoke();
+
         _gunData.isReloading = true;
+
         var timer = _reloadTime;
 
         while (timer > 0)

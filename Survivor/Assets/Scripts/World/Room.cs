@@ -2,7 +2,16 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
-    public static Room ActiveRoom;
+    public GameObject DoorU;
+    public GameObject DoorR;
+    public GameObject DoorD;
+    public GameObject DoorL;
 
-    public Vector3 GridPosition { get; set; }
+    private void Awake()
+    {
+        DoorD.SetActive(true);
+        DoorU.SetActive(true);
+        DoorR.SetActive(true);
+        DoorL.SetActive(true);
+    }
 }

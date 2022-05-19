@@ -152,8 +152,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51a276dbb8ee30c40a07af423336b599, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 5474286946348654413, guid: 4cc0b221b67c50b49b3f5eeca7612fbb, type: 3}
-  _size: 5
+  _prefabs:
+  - {fileID: 5474286946348654413, guid: 4cc0b221b67c50b49b3f5eeca7612fbb, type: 3}
+  StartingRoom: {fileID: 5474286946348654413, guid: 4cc0b221b67c50b49b3f5eeca7612fbb, type: 3}
 --- !u!4 &509471723
 Transform:
   m_ObjectHideFlags: 0

@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5474286945216566767
 Transform:
   m_ObjectHideFlags: 0
@@ -30,7 +30,7 @@ Transform:
   - {fileID: 5474286946805845996}
   - {fileID: 5474286946647653526}
   m_Father: {fileID: 5474286946348654414}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5474286945256624624
 GameObject:
@@ -617,7 +617,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5474286945323882189
 Transform:
   m_ObjectHideFlags: 0
@@ -3069,7 +3069,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7db328e04177e1742afdedd253bb4eaa, type: 2}
+  - {fileID: 2100000, guid: 7024a106b69141e44ae9be81efd37e4a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3449,7 +3449,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7db328e04177e1742afdedd253bb4eaa, type: 2}
+  - {fileID: 2100000, guid: 7024a106b69141e44ae9be81efd37e4a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5079,7 +5079,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7db328e04177e1742afdedd253bb4eaa, type: 2}
+  - {fileID: 2100000, guid: 7024a106b69141e44ae9be81efd37e4a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7235,7 +7235,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7db328e04177e1742afdedd253bb4eaa, type: 2}
+  - {fileID: 2100000, guid: 7024a106b69141e44ae9be81efd37e4a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9610,7 +9610,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7db328e04177e1742afdedd253bb4eaa, type: 2}
+  - {fileID: 2100000, guid: 7024a106b69141e44ae9be81efd37e4a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9866,8 +9866,8 @@ Transform:
   m_Children:
   - {fileID: 5474286945863797078}
   - {fileID: 5474286945915207815}
-  - {fileID: 5474286946879742866}
   - {fileID: 5474286945216566767}
+  - {fileID: 5474286946879742866}
   - {fileID: 5474286945323882189}
   - {fileID: 5474286947250267032}
   m_Father: {fileID: 0}
@@ -12432,7 +12432,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7db328e04177e1742afdedd253bb4eaa, type: 2}
+  - {fileID: 2100000, guid: 7024a106b69141e44ae9be81efd37e4a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14142,7 +14142,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7db328e04177e1742afdedd253bb4eaa, type: 2}
+  - {fileID: 2100000, guid: 7024a106b69141e44ae9be81efd37e4a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14902,7 +14902,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7db328e04177e1742afdedd253bb4eaa, type: 2}
+  - {fileID: 2100000, guid: 7024a106b69141e44ae9be81efd37e4a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14952,7 +14952,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5474286946879742866
 Transform:
   m_ObjectHideFlags: 0
@@ -14967,7 +14967,7 @@ Transform:
   - {fileID: 5474286945878715821}
   - {fileID: 5474286946057411815}
   m_Father: {fileID: 5474286946348654414}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5474286946892620850
 GameObject:
@@ -17074,7 +17074,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5474286947250267032
 Transform:
   m_ObjectHideFlags: 0
