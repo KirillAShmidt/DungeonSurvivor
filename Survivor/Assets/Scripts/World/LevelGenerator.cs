@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using System;
+using UnityEngine.AI;
 
 public class LevelGenerator : MonoBehaviour
 {
@@ -10,7 +11,13 @@ public class LevelGenerator : MonoBehaviour
     private Room[] _prefabs;
 
     [SerializeField]
-    private Room StartingRoom;
+    private Room _startingRoom;
+
+    [SerializeField]
+    private int _gridSize;
+
+    [SerializeField]
+    private int _roomsAmount;
 
     private Room[,] spawnedRooms;
 
@@ -18,13 +25,15 @@ public class LevelGenerator : MonoBehaviour
 
     private IEnumerator Start()
     {
-        spawnedRooms = new Room[11, 11];
-        spawnedRooms[5, 5] = Instantiate(StartingRoom);
+        spawnedRooms = new Room[_gridSize, _gridSize];
+        spawnedRooms[_gridSize / 2, _gridSize / 2] = Instantiate(_startingRoom);
 
-        for(int i = 0; i < 20; i++)
+        yield return new WaitForSecondsRealtime(0.3f);
+
+        for (int i = 0; i < _roomsAmount; i++)
         {
+            // yield return new WaitForSecondsRealtime(0.3f);
             PlaceOneRoom();
-            yield return new WaitForSecondsRealtime(0.3f);
         }
 
         OnLevelLoaded?.Invoke();
@@ -67,18 +76,21 @@ public class LevelGenerator : MonoBehaviour
 
         Room newRoom = Instantiate(_prefabs[UnityEngine.Random.Range(0, _prefabs.Length)]);
 
-        int limit = 10;
+        int limit = 500;
         while (limit-- > 0)
         {
             Vector2Int position = vacantPlaces.ElementAt(UnityEngine.Random.Range(0, vacantPlaces.Count));
 
             if (ConnectToSomething(newRoom, position))
             {
-                newRoom.transform.position = new Vector3(position.x - 5, 0, position.y - 5) * 12;
+                // TODO: исправить магическое "12" на размер комнаты
+                newRoom.transform.position = new Vector3(position.x - (_gridSize / 2), 0, position.y - (_gridSize / 2)) * 12;
                 spawnedRooms[position.x, position.y] = newRoom;
-                break;
+                return;
             }
         }
+
+        Destroy(newRoom);
     }
 
     private bool ConnectToSomething(Room room, Vector2Int p)
