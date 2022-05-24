@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using System;
-using UnityEngine.AI;
 
 public class LevelGenerator : MonoBehaviour
 {
@@ -12,6 +11,9 @@ public class LevelGenerator : MonoBehaviour
 
     [SerializeField]
     private Room _startingRoom;
+
+    [SerializeField]
+    private Room _bossRoom;
 
     [SerializeField]
     private int _gridSize;
@@ -30,16 +32,18 @@ public class LevelGenerator : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(0.3f);
 
-        for (int i = 0; i < _roomsAmount; i++)
+        for (int i = 0; i < _roomsAmount - 2; i++)
         {
             // yield return new WaitForSecondsRealtime(0.3f);
-            PlaceOneRoom();
+            PlaceOneRoom(_prefabs[0]);
         }
+
+        PlaceOneRoom(_bossRoom);
 
         OnLevelLoaded?.Invoke();
     }
 
-    private void PlaceOneRoom()
+    private void PlaceOneRoom(Room room)
     {
         HashSet<Vector2Int> vacantPlaces = new HashSet<Vector2Int>();
 
@@ -74,7 +78,7 @@ public class LevelGenerator : MonoBehaviour
             }
         }
 
-        Room newRoom = Instantiate(_prefabs[UnityEngine.Random.Range(0, _prefabs.Length)]);
+        Room newRoom = Instantiate(room);
 
         int limit = 500;
         while (limit-- > 0)
@@ -100,10 +104,10 @@ public class LevelGenerator : MonoBehaviour
 
         List<Vector2Int> neighbours = new List<Vector2Int>();
 
-        if (room.DoorU != null && p.y < maxY && spawnedRooms[p.x, p.y + 1]?.DoorD != null) neighbours.Add(Vector2Int.up);
-        if (room.DoorD != null && p.y > 0 && spawnedRooms[p.x, p.y - 1]?.DoorU != null) neighbours.Add(Vector2Int.down);
-        if (room.DoorR != null && p.x < maxX && spawnedRooms[p.x + 1, p.y]?.DoorL != null) neighbours.Add(Vector2Int.right);
-        if (room.DoorL != null && p.x > 0 && spawnedRooms[p.x - 1, p.y]?.DoorR != null) neighbours.Add(Vector2Int.left);
+        if (room.Doors["U"] != null && p.y < maxY && spawnedRooms[p.x, p.y + 1]?.Doors["D"] != null) neighbours.Add(Vector2Int.up);
+        if (room.Doors["D"] != null && p.y > 0 && spawnedRooms[p.x, p.y - 1]?.Doors["U"] != null) neighbours.Add(Vector2Int.down);
+        if (room.Doors["R"] != null && p.x < maxX && spawnedRooms[p.x + 1, p.y]?.Doors["L"] != null) neighbours.Add(Vector2Int.right);
+        if (room.Doors["L"] != null && p.x > 0 && spawnedRooms[p.x - 1, p.y]?.Doors["R"] != null) neighbours.Add(Vector2Int.left);
 
         if (neighbours.Count == 0) return false;
 
@@ -112,23 +116,23 @@ public class LevelGenerator : MonoBehaviour
 
         if (selectedDirection == Vector2Int.up)
         {
-            room.DoorU.SetActive(false);
-            selectedRoom.DoorD.SetActive(false);
+            room.Doors["U"].gameObject.SetActive(false);
+            selectedRoom.Doors["D"].gameObject.SetActive(false);
         }
         else if (selectedDirection == Vector2Int.down)
         {
-            room.DoorD.SetActive(false);
-            selectedRoom.DoorU.SetActive(false);
+            room.Doors["D"].gameObject.SetActive(false);
+            selectedRoom.Doors["U"].gameObject.SetActive(false);
         }
         else if (selectedDirection == Vector2Int.right)
         {
-            room.DoorR.SetActive(false);
-            selectedRoom.DoorL.SetActive(false);
+            room.Doors["R"].gameObject.SetActive(false);
+            selectedRoom.Doors["L"].gameObject.SetActive(false);
         }
         else if (selectedDirection == Vector2Int.left)
         {
-            room.DoorL.SetActive(false);
-            selectedRoom.DoorR.SetActive(false);
+            room.Doors["L"].gameObject.SetActive(false);
+            selectedRoom.Doors["R"].gameObject.SetActive(false);
         }
 
         return true;

@@ -1,32 +1,29 @@
 using UnityEngine;
+using System.Collections.Generic;
 
+[RequireComponent(typeof(EnemySpawner))]
 public class Room : MonoBehaviour
 {
-    [SerializeField]
-    private Enemy[] _enemies;
-
     public static Room ActiveRoom;
 
-    public GameObject DoorU;
-    public GameObject DoorR;
-    public GameObject DoorD;
-    public GameObject DoorL;
+    public Dictionary<string, Door> Doors { get; set; } = new Dictionary<string, Door>();
 
-    private bool _isCompleted = false;
+    private List<Door> _openedDoors = new List<Door>();
+    private EnemySpawner _enemySpawner;
 
     private void Awake()
     {
-        if(DoorD != null)
-            DoorD.SetActive(true);
+        _enemySpawner = GetComponent<EnemySpawner>();
+        _enemySpawner.OnRoomEntered += CloseDoors;
+        _enemySpawner.OnRoomCompleted += OpenDoors;
 
-        if(DoorU != null)
-            DoorU.SetActive(true);
-
-        if(DoorR != null)
-            DoorR.SetActive(true);
-
-        if(DoorL != null)
-            DoorL.SetActive(true);
+        List<Door> doors = new List<Door>();
+        doors.AddRange(GetComponentsInChildren<Door>());
+        
+        for(int i = 0; i < doors.Count; i++)
+        {
+            Doors.Add(doors[i].Name, doors[i]);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -36,19 +33,26 @@ public class Room : MonoBehaviour
         if (player != null)
         {
             ActiveRoom = this;
+        }
+    }
 
-            if (!_isCompleted)
+    private void CloseDoors()
+    {
+        foreach (Door door in Doors.Values)
+        {
+            if (!door.gameObject.activeInHierarchy)
             {
-                SpawnEnemies();
+                _openedDoors.Add(door);
+                door.gameObject.SetActive(true);
             }
         }
     }
 
-    private void SpawnEnemies()
+    private void OpenDoors()
     {
-        var enemyClone = Instantiate(_enemies[Random.Range(0, _enemies.Length)]);
-        enemyClone.transform.position = transform.position + new Vector3(3, 1, 3);
-
-        _isCompleted = true;
+        foreach (Door door in _openedDoors)
+        {
+            door.gameObject.SetActive(false);
+        }
     }
 }

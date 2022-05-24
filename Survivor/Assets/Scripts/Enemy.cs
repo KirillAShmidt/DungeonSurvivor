@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using System;
 
 public abstract class Enemy : MonoBehaviour, IDamageble
 {
@@ -10,7 +11,9 @@ public abstract class Enemy : MonoBehaviour, IDamageble
 
     private int _health = 10;
 
-    private void Start()
+    public Action<Enemy> OnEnemyDead;
+
+    private void Awake()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _player = FindObjectOfType<Player>();
@@ -22,6 +25,7 @@ public abstract class Enemy : MonoBehaviour, IDamageble
 
         if(_health <= 0)
         {
+            OnEnemyDead?.Invoke(this);
             Destroy(gameObject);
         }
         
